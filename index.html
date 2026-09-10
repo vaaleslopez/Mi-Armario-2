@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Tienda de Ropa</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#667eea">
+    <link rel="apple-touch-icon" href="icon-192.png">
+</head>
+<body>
+    <header>
+        <h1>🛍️ Mi Stock de Ropa</h1>
+        <button id="btnAgregar" class="btn-primary">+ Agregar Prenda</button>
+    </header>
+
+    <!-- Filtros -->
+    <section id="filtros">
+        <h3>Filtrar por:</h3>
+        <div class="filtros-grid">
+            <select id="filtroTipo">
+                <option value="">Todos los tipos</option>
+                <option value="remera">Remera</option>
+                <option value="pantalon">Pantalón</option>
+                <option value="vestido">Vestido</option>
+                <option value="campera">Campera</option>
+                <option value="buzo">Buzo</option>
+                <option value="short">Short</option>
+                <option value="otro">Otro</option>
+            </select>
+            <select id="filtroTalle">
+                <option value="">Todos los talles</option>
+                <option value="xs">XS</option>
+                <option value="s">S</option>
+                <option value="m">M</option>
+                <option value="l">L</option>
+                <option value="xl">XL</option>
+                <option value="xxl">XXL</option>
+                <option value="unico">Único</option>
+            </select>
+            <select id="filtroGenero">
+                <option value="">Todos</option>
+                <option value="mujer">Mujer</option>
+                <option value="hombre">Hombre</option>
+                <option value="unisex">Unisex</option>
+            </select>
+        </div>
+        <button id="btnCompartir" class="btn-share">📤 Compartir selección</button>
+    </section>
+
+    <!-- Lista de productos -->
+    <main id="productos"></main>
+
+    <!-- Modal para agregar/editar -->
+    <div id="modal" class="modal oculto">
+        <div class="modal-content">
+            <h2 id="modalTitulo">Agregar Prenda</h2>
+            <form id="formProducto">
+                <input type="hidden" id="productoId">
+                
+                <label>Nombre:</label>
+                <input type="text" id="nombre" required placeholder="Ej: Remera negra básica">
+                
+                <label>Tipo:</label>
+                <select id="tipo" required>
+                    <option value="remera">Remera</option>
+                    <option value="pantalon">Pantalón</option>
+                    <option value="vestido">Vestido</option>
+                    <option value="campera">Campera</option>
+                    <option value="buzo">Buzo</option>
+                    <option value="short">Short</option>
+                    <option value="otro">Otro</option>
+                </select>
+                
+                <label>Talle:</label>
+                <select id="talle" required>
+                    <option value="xs">XS</option>
+                    <option value="s">S</option>
+                    <option value="m">M</option>
+                    <option value="l">L</option>
+                    <option value="xl">XL</option>
+                    <option value="xxl">XXL</option>
+                    <option value="unico">Único</option>
+                </select>
+                
+                <label>Género:</label>
+                <select id="genero" required>
+                    <option value="mujer">Mujer</option>
+                    <option value="hombre">Hombre</option>
+                    <option value="unisex">Unisex</option>
+                </select>
+                
+                <label>Precio ($):</label>
+                <input type="number" id="precio" required placeholder="0" min="0">
+                
+                <label>Stock (cantidad):</label>
+                <input type="number" id="stock" required placeholder="1" min="0">
+                
+                <label>Descripción:</label>
+                <textarea id="descripcion" placeholder="Color, material, detalles..."></textarea>
+                
+                <label>Fotos (podés subir varias):</label>
+                <input type="file" id="fotos" accept="image/*" multiple>
+                <div id="previewFotos" class="preview-fotos"></div>
+                
+                <div class="botones-modal">
+                    <button type="button" id="btnCancelar" class="btn-secondary">Cancelar</button>
+                    <button type="submit" class="btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        // Registrar service worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js')
+                .then(reg => console.log('Service Worker registrado'))
+                .catch(err => console.log('Error:', err));
+        }
+    </script>
+</body>
+</html>
